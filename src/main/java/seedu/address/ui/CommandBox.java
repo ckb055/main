@@ -21,6 +21,7 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private TextField commandTextField;
 
+
     public CommandBox(CommandExecutor commandExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
@@ -64,6 +65,7 @@ public class CommandBox extends UiPart<Region> {
     /**
      * Represents a function that can execute commands.
      */
+
     @FunctionalInterface
     public interface CommandExecutor {
         /**
