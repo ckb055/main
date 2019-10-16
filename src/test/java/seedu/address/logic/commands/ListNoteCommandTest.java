@@ -24,7 +24,7 @@ public class ListNoteCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalNoteList(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel = new ModelManager(model.getStudyBuddyBook(), new UserPrefs());
     }
 
     @Test

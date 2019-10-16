@@ -25,7 +25,7 @@ import seedu.address.model.tag.Tag;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final StudyBuddyBook studyBuddyBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Flashcard> filteredFlashcards;
@@ -36,23 +36,23 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyStudyBuddyBook addressBook, ReadOnlyUserPrefs userPrefs) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.studyBuddyBook = new StudyBuddyBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredFlashcards = new FilteredList<>(this.addressBook.getFlashcardList());
-        filteredNotes = new FilteredList<>(this.addressBook.getNoteList());
-        filteredCheatSheets = new FilteredList<>(this.addressBook.getCheatSheetList());
-        filteredTags = new FilteredList<>(this.addressBook.getTagList());
+        filteredPersons = new FilteredList<>(this.studyBuddyBook.getPersonList());
+        filteredFlashcards = new FilteredList<>(this.studyBuddyBook.getFlashcardList());
+        filteredNotes = new FilteredList<>(this.studyBuddyBook.getNoteList());
+        filteredCheatSheets = new FilteredList<>(this.studyBuddyBook.getCheatSheetList());
+        filteredTags = new FilteredList<>(this.studyBuddyBook.getTagList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new StudyBuddyBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -93,30 +93,30 @@ public class ModelManager implements Model {
     //=========== AddressBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setStudyBuddyBook(ReadOnlyStudyBuddyBook studyBuddyBook) {
+        this.studyBuddyBook.resetData(studyBuddyBook);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyStudyBuddyBook getStudyBuddyBook() {
+        return studyBuddyBook;
     }
 
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return addressBook.hasPerson(person);
+        return studyBuddyBook.hasPerson(person);
     }
 
     @Override
     public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+        studyBuddyBook.removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
-        addressBook.addPerson(person);
+        studyBuddyBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -124,35 +124,35 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        addressBook.setPerson(target, editedPerson);
+        studyBuddyBook.setPerson(target, editedPerson);
     }
 
     @Override
     public boolean hasFlashcard(Flashcard flashcard) {
         requireNonNull(flashcard);
-        return addressBook.hasFlashcard(flashcard);
+        return studyBuddyBook.hasFlashcard(flashcard);
     }
 
     @Override
     public void addFlashcard(Flashcard flashcard) {
-        addressBook.addFlashcard(flashcard);
+        studyBuddyBook.addFlashcard(flashcard);
         updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
     }
 
     @Override
     public boolean hasNote(Note note) {
         requireNonNull(note);
-        return addressBook.hasNote(note);
+        return studyBuddyBook.hasNote(note);
     }
 
     @Override
     public void deleteNote(Note target) {
-        addressBook.removeNote(target);
+        studyBuddyBook.removeNote(target);
     }
 
     @Override
     public void addNote(Note note) {
-        addressBook.addNote(note);
+        studyBuddyBook.addNote(note);
         updateFilteredNoteList(PREDICATE_SHOW_ALL_NOTES);
     }
 
@@ -160,7 +160,7 @@ public class ModelManager implements Model {
     public void setNote(Note target, Note editedNote) {
         requireAllNonNull(target, editedNote);
 
-        addressBook.setNote(target, editedNote);
+        studyBuddyBook.setNote(target, editedNote);
     }
 
     //=========== Filtered Tag List Accessors =============================================================
@@ -239,7 +239,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return studyBuddyBook.equals(other.studyBuddyBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons)
                 && filteredNotes.equals(other.filteredNotes);
@@ -247,33 +247,33 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteFlashcard(Flashcard target) {
-        addressBook.removeFlashcard(target);
+        studyBuddyBook.removeFlashcard(target);
     }
 
     //===================CheatSheetBook============================================================
 
     @Override
     public void addCheatSheet(CheatSheet cheatSheet) {
-        addressBook.addCheatSheet(cheatSheet);
+        studyBuddyBook.addCheatSheet(cheatSheet);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public boolean hasCheatSheet(CheatSheet cheatSheet) {
         requireNonNull(cheatSheet);
-        return addressBook.hasCheatSheet(cheatSheet);
+        return studyBuddyBook.hasCheatSheet(cheatSheet);
     }
 
     @Override
     public void setCheatSheet(CheatSheet target, CheatSheet editedCheatSheet) {
         requireAllNonNull(target, editedCheatSheet);
 
-        addressBook.setCheatSheet(target, editedCheatSheet);
+        studyBuddyBook.setCheatSheet(target, editedCheatSheet);
     }
 
     @Override
     public void deleteCheatSheet(CheatSheet cheatSheet) {
-        addressBook.deleteCheatSheet(cheatSheet);
+        studyBuddyBook.deleteCheatSheet(cheatSheet);
     }
 
 

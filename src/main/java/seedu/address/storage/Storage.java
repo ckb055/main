@@ -5,7 +5,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyStudyBuddyBook;
 import seedu.address.model.ReadOnlyCheatSheetBook;
 import seedu.address.model.ReadOnlyFlashcardBook;
 import seedu.address.model.ReadOnlyUserPrefs;
@@ -32,7 +32,7 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     Path getFlashcardFilePath();
 
     @Override
-    Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyStudyBuddyBook> readAddressBook() throws DataConversionException, IOException;
 
     @Override
     Optional<ReadOnlyCheatSheetBook> readCheatSheetBook() throws DataConversionException, IOException;
@@ -41,7 +41,7 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     Optional<ReadOnlyFlashcardBook> readFlashcardBook() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void saveAddressBook(ReadOnlyStudyBuddyBook addressBook) throws IOException;
 
     @Override
     void saveCheatSheetBook(ReadOnlyCheatSheetBook cheatSheetBook) throws IOException;

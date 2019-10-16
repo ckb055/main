@@ -33,7 +33,7 @@ public class DeleteNoteCommandTest {
 
         String expectedMessage = String.format(DeleteNoteCommand.MESSAGE_DELETE_NOTE_SUCCESS, noteToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getStudyBuddyBook(), new UserPrefs());
         expectedModel.deleteNote(noteToDelete);
 
         assertCommandSuccess(deleteNoteCommand, model, expectedMessage, expectedModel);
@@ -56,7 +56,7 @@ public class DeleteNoteCommandTest {
 
         String expectedMessage = String.format(DeleteNoteCommand.MESSAGE_DELETE_NOTE_SUCCESS, noteToDelete);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getStudyBuddyBook(), new UserPrefs());
         expectedModel.deleteNote(noteToDelete);
         showNoNote(expectedModel);
 
@@ -69,7 +69,7 @@ public class DeleteNoteCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_NOTE;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getNoteList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getStudyBuddyBook().getNoteList().size());
 
         DeleteNoteCommand deleteNoteCommand = new DeleteNoteCommand(outOfBoundIndex);
 

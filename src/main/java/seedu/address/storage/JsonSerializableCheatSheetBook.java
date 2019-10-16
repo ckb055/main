@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.StudyBuddyBook;
 import seedu.address.model.ReadOnlyCheatSheetBook;
 import seedu.address.model.cheatsheet.CheatSheet;
 
@@ -46,16 +46,16 @@ class JsonSerializableCheatSheetBook {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public StudyBuddyBook toModelType() throws IllegalValueException {
+        StudyBuddyBook studyBuddyBook = new StudyBuddyBook();
         for (JsonAdaptedCheatSheet jsonAdaptedCheatSheet : cheatSheets) {
             CheatSheet cheatSheet = jsonAdaptedCheatSheet.toModelType();
-            if (addressBook.hasCheatSheet(cheatSheet)) {
+            if (studyBuddyBook.hasCheatSheet(cheatSheet)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_CHEATSHEET);
             }
-            addressBook.addCheatSheet(cheatSheet);
+            studyBuddyBook.addCheatSheet(cheatSheet);
         }
-        return addressBook;
+        return studyBuddyBook;
     }
 
 }

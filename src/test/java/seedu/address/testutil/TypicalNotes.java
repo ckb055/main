@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.StudyBuddyBook;
 import seedu.address.model.note.Note;
 
 /**
@@ -41,8 +41,8 @@ public class TypicalNotes {
     /**
      * Returns an {@code AddressBook} with all the typical notes.
      */
-    public static AddressBook getTypicalNoteList() {
-        AddressBook ab = new AddressBook();
+    public static StudyBuddyBook getTypicalNoteList() {
+        StudyBuddyBook ab = new StudyBuddyBook();
         for (Note note : getTypicalNotes()) {
             ab.addNote(note);
         }

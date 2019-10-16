@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.StudyBuddyBook;
 import seedu.address.model.ReadOnlyFlashcardBook;
 import seedu.address.model.flashcard.Flashcard;
 
@@ -46,16 +46,16 @@ class JsonSerializableFlashcardBook {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public StudyBuddyBook toModelType() throws IllegalValueException {
+        StudyBuddyBook studyBuddyBook = new StudyBuddyBook();
         for (JsonAdaptedFlashcard jsonAdaptedFlashcard : flashcards) {
             Flashcard flashcard = jsonAdaptedFlashcard.toModelType();
-            if (addressBook.hasFlashcard(flashcard)) {
+            if (studyBuddyBook.hasFlashcard(flashcard)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_FLASHCARD);
             }
-            addressBook.addFlashcard(flashcard);
+            studyBuddyBook.addFlashcard(flashcard);
         }
-        return addressBook;
+        return studyBuddyBook;
     }
 
 }

@@ -24,25 +24,25 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddressBookTest {
+public class StudyBuddyBookTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final StudyBuddyBook studyBuddyBook = new StudyBuddyBook();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), studyBuddyBook.getPersonList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> studyBuddyBook.resetData(null));
     }
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+        StudyBuddyBook newData = getTypicalAddressBook();
+        studyBuddyBook.resetData(newData);
+        assertEquals(newData, studyBuddyBook);
     }
 
     /* To fix
@@ -61,44 +61,44 @@ public class AddressBookTest {
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> studyBuddyBook.hasPerson(null));
     }
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+        assertFalse(studyBuddyBook.hasPerson(ALICE));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+        studyBuddyBook.addPerson(ALICE);
+        assertTrue(studyBuddyBook.hasPerson(ALICE));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
+        studyBuddyBook.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(studyBuddyBook.hasPerson(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> studyBuddyBook.getPersonList().remove(0));
     }
 
     /**
      * A stub ReadOnlyAddressBook whose persons and flashcard list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class StudyBuddyBookStub implements ReadOnlyStudyBuddyBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<Flashcard> flashcards = FXCollections.observableArrayList();
         private final ObservableList<Note> notes = FXCollections.observableArrayList();
         private final ObservableList<CheatSheet> cheatSheets = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons, Collection<Flashcard> flashcards) {
+        StudyBuddyBookStub(Collection<Person> persons, Collection<Flashcard> flashcards) {
             this.persons.setAll(persons);
             this.flashcards.setAll(flashcards);
         }
