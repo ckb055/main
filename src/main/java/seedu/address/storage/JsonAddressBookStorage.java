@@ -83,8 +83,8 @@ public class JsonAddressBookStorage implements AddressBookStorage {
 
         Optional<JsonSerializableFlashcard> jsonFlashcard = JsonUtil.readJsonFile(
                 flashcardFilePath, JsonSerializableFlashcard.class);
-        Optional<JsonSerializableFlashcard> jsonCheatSheet = JsonUtil.readJsonFile(
-                flashcardFilePath, JsonSerializableFlashcard.class);
+        Optional<JsonSerializableCheatSheet> jsonCheatSheet = JsonUtil.readJsonFile(
+                flashcardFilePath, JsonSerializableCheatSheet.class);
         //Adjust for notes for top and bottom
         if (!jsonFlashcard.isPresent() && !jsonCheatSheet.isPresent()) {
             return Optional.empty();

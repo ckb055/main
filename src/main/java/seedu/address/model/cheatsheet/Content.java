@@ -35,8 +35,15 @@ public class Content {
         checkArgument(isValidContent(answer), MESSAGE_CONSTRAINTS);
         this.content = "Question: " + question
                 + "; Answer: " + answer;
-
         this.index = COUNTER++;
+    }
+
+    public static void resetCounter() {
+        COUNTER = 1;
+    }
+
+    public int getIndex() {
+        return index;
     }
 
     /**
@@ -53,13 +60,6 @@ public class Content {
                 && content.equals(((Content) other).content)); // state check
     }
 
-    public static void resetCounter() {
-        COUNTER = 1;
-    }
-
-    public int getIndex() {
-        return index;
-    }
 
     @Override
     public int hashCode() {
@@ -70,7 +70,7 @@ public class Content {
      * Format state as text for viewing.
      */
     public String toString() {
-        return "[ " + index + ". " + content + " ]";
+        return content;
     }
 
 }

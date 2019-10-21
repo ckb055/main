@@ -21,6 +21,8 @@ public class CheatSheet extends StudyBuddyItem {
     // Data fields
     private final Set<Content> contents = new HashSet<>();
 
+    private int contentIndex = 0;
+
     /**
      * Every field must be present and not null.
      */
@@ -29,6 +31,7 @@ public class CheatSheet extends StudyBuddyItem {
         requireAllNonNull(title, contents, tags);
         this.title = title;
         this.contents.addAll(contents);
+        this.resetIndex();
     }
 
     /**
@@ -40,6 +43,7 @@ public class CheatSheet extends StudyBuddyItem {
         super(tags);
         requireAllNonNull(title, tags);
         this.title = title;
+        this.resetIndex();
     }
 
     public Title getTitle() {
@@ -50,14 +54,13 @@ public class CheatSheet extends StudyBuddyItem {
         return Collections.unmodifiableSet(contents);
     }
 
-    public Content getContent(int index) {
-        for (Content current : contents) {
-            if (current.getIndex() == index) {
-                return current;
-            }
-        }
+    public void resetIndex() {
+        this.contentIndex = 0;
+    }
 
-        return null;
+    private String formatContent (Content c) {
+        this.contentIndex++;
+        return "[ " + contentIndex + ". " + c + " ]";
     }
 
     public String getContentsInStringForm() {
@@ -110,6 +113,7 @@ public class CheatSheet extends StudyBuddyItem {
 
     @Override
     public String toString() {
+        this.resetIndex();
         final StringBuilder builder = new StringBuilder();
         builder.append(" Title: ")
                 .append(getTitle())
@@ -117,7 +121,7 @@ public class CheatSheet extends StudyBuddyItem {
         getTags().forEach(builder::append);
 
         builder.append(" Contents: ");
-        getContents().forEach(builder::append);
+        getContents().forEach(c -> builder.append(formatContent(c)));
 
         return builder.toString();
     }
